@@ -257,12 +257,13 @@ function watchFonts() {
 
 gulp.task("dev", function (next) {
     watchHtml();
-    watchImages();
     watchPublic();
     watchScss();
     watchJs();
     watchAudio();
     watchFonts();
+    images(next);
+    watchImages();
     connect.server({
         livereload: true,
         root: "dist",
@@ -272,8 +273,8 @@ gulp.task("dev", function (next) {
 });
 
 gulp.task("build", function (next) {
-    //fs.rmSync("./temp", { recursive: true });
-    //fs.rmSync("./dist", { recursive: true });
+    fs.rmSync("./temp", { recursive: true });
+    fs.rmSync("./dist", { recursive: true });
 
     jsBuild(next);
     scss(next);
