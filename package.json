@@ -1,0 +1,39 @@
+{
+    "name": "vriska-wake-up-pixijs",
+    "version": "1.0.0",
+    "description": "A recreation of Act Omega's [S] Vriska: W8ke Up. made using Pixi.js.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "gulp build",
+        "split-gifs": "gulp split-gifs",
+        "dev": "gulp dev"
+    },
+    "author": "MadCreativity",
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/core": "^7.8.6",
+        "@babel/preset-env": "^7.8.6",
+        "babel-plugin-minify-mangle-names": "^0.5.0",
+        "canvas": "^2.6.1",
+        "gif-frames": "^1.0.1",
+        "gulp": "^4.0.2",
+        "gulp-babel": "^8.0.0",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-connect": "^5.7.0",
+        "gulp-ejs": "^5.0.0",
+        "gulp-htmlmin": "^5.0.1",
+        "gulp-imagemin": "^7.1.0",
+        "gulp-jsonminify": "^1.1.0",
+        "gulp-minify": "^3.1.0",
+        "gulp-rename": "^2.0.0",
+        "gulp-sass": "^4.0.2",
+        "gulp-util": "^3.0.8",
+        "node-sass": "^4.13.1"
+    },
+    "dependencies": {
+        "pixi.js": "^5.3.7",
+        "stream-to-array": "^2.3.0",
+        "webpack-stream": "^6.1.2"
+    }
+}
