@@ -1,7 +1,7 @@
-"use strict";
 const gutil = require("gulp-util");
 const through = require("through2");
 const fs = require("fs");
+const pathModule = require("path");
 
 module.exports = function (options) {
     options = options || {};
@@ -11,7 +11,7 @@ module.exports = function (options) {
             return "";
         }
 
-        const fileReg = /import\s["'](.*?)["']/gi;
+        const fileReg = /import\s["'](.*?)["'];?/gi;
 
         if (!fs.existsSync(path)) {
             throw new Error("file " + path + " no exist");
@@ -34,7 +34,10 @@ module.exports = function (options) {
         importStack[path] = path;
 
         content = content.replace(fileReg, (match, fileName) => {
-            let importPath = fileName;
+            let importPath = pathModule.resolve(
+                pathModule.dirname(path),
+                fileName
+            );
 
             if (importPath in importStack) {
                 return "";
@@ -84,3 +87,55 @@ module.exports = function (options) {
         importStack = {};
     });
 };
+
+/*
+
+const fileReg = /import\s["'](.*?)["'];?/gi;
+
+let importStack = {};
+const importJS = (contents, path) => {
+    let content;
+    if (contents != "") {
+        content = contents;
+    } else if (path) {
+        if (!fs.existsSync(path)) {
+            throw new Error("file " + path + " doesn't exist");
+        }
+
+        content = fs.readFileSync(path, {
+            encoding: "utf8",
+        });
+    } else {
+        return "";
+    }
+
+    importStack[path] = path;
+
+    content = content.replace(fileReg, (match, fileName) => {
+        let importPath = pathModule.resolve(pathModule.dirname(path), fileName);
+
+        if (importPath in importStack) {
+            return "";
+        }
+
+        let importContent = importJS("", importPath) || "";
+
+        return importContent;
+    });
+
+    return content;
+};
+
+module.exports = () => {
+    return through.obj(function (file, encoding, callback) {
+        file.contents = Buffer.from(
+            importJS(file.contents.toString(), file.path)
+        );
+
+        this.push(file);
+        console.log(file.contents.toString());
+        callback();
+        importStack = {};
+    });
+};
+*/

@@ -188,7 +188,7 @@ function jsBuild(next) {
 
 function js(next) {
     gulp.src("./src/js/templates/**/*.js")
-        .pipe(jsImport().on("error", (err) => console.error(err)))
+        //.pipe(jsImport().on("error", (err) => console.error(err)))
         .pipe(
             webpack({
                 output: {

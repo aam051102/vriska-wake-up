@@ -32,6 +32,7 @@
         "node-sass": "^4.13.1"
     },
     "dependencies": {
+        "pixi-sound": "^3.0.5",
         "pixi.js": "^5.3.7",
         "stream-to-array": "^2.3.0",
         "webpack-stream": "^6.1.2"
